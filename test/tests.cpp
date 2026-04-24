@@ -11,14 +11,14 @@
 const double EPS = 1e-5;
 const double PI = 3.14159265358979323846;
 
-TEST(CircleSpec, DefaultConstructorStartsAtZero) {
+TEST(st2, circle1) {
   Circle circle;
   EXPECT_NEAR(circle.getRadius(), 0.0, EPS);
   EXPECT_NEAR(circle.getFerence(), 0.0, EPS);
   EXPECT_NEAR(circle.getArea(), 0.0, EPS);
 }
 
-TEST(CircleSpec, ConstructorCalculatesDerivedValues) {
+TEST(st2, circle2) {
   const double radius = 7.5;
   Circle circle(radius);
   EXPECT_NEAR(circle.getRadius(), radius, EPS);
@@ -26,18 +26,18 @@ TEST(CircleSpec, ConstructorCalculatesDerivedValues) {
   EXPECT_NEAR(circle.getArea(), PI * radius * radius, EPS);
 }
 
-TEST(CircleSpec, ConstructorAllowsZeroRadius) {
+TEST(st2, circle3) {
   Circle circle(0.0);
   EXPECT_NEAR(circle.getRadius(), 0.0, EPS);
   EXPECT_NEAR(circle.getFerence(), 0.0, EPS);
   EXPECT_NEAR(circle.getArea(), 0.0, EPS);
 }
 
-TEST(CircleSpec, ConstructorRejectsNegativeRadius) {
+TEST(st2, circle4) {
   EXPECT_THROW(Circle(-10.5), std::invalid_argument);
 }
 
-TEST(CircleSpec, SetRadiusUpdatesAllValues) {
+TEST(st2, circle5) {
   Circle circle(2.0);
   const double new_radius = 4.5;
   circle.setRadius(new_radius);
@@ -46,14 +46,14 @@ TEST(CircleSpec, SetRadiusUpdatesAllValues) {
   EXPECT_NEAR(circle.getArea(), PI * new_radius * new_radius, EPS);
 }
 
-TEST(CircleSpec, SetRadiusRejectsNegativeValue) {
+TEST(st2, circle6) {
   Circle circle(3.0);
   const double original_radius = circle.getRadius();
   EXPECT_THROW(circle.setRadius(-2.5), std::invalid_argument);
   EXPECT_NEAR(circle.getRadius(), original_radius, EPS);
 }
 
-TEST(CircleSpec, SetFerenceUpdatesRadiusAndArea) {
+TEST(st2, circle7) {
   Circle circle(1.0);
   const double new_ference = 31.4159;
   circle.setFerence(new_ference);
@@ -63,14 +63,14 @@ TEST(CircleSpec, SetFerenceUpdatesRadiusAndArea) {
   EXPECT_NEAR(circle.getArea(), PI * expected_radius * expected_radius, EPS);
 }
 
-TEST(CircleSpec, SetFerenceRejectsNegativeValue) {
+TEST(st2, circle8) {
   Circle circle(3.0);
   const double original_ference = circle.getFerence();
   EXPECT_THROW(circle.setFerence(-15.0), std::invalid_argument);
   EXPECT_NEAR(circle.getFerence(), original_ference, EPS);
 }
 
-TEST(CircleSpec, SetAreaUpdatesRadiusAndFerence) {
+TEST(st2, circle9) {
   Circle circle(1.0);
   const double new_area = 153.938;
   circle.setArea(new_area);
@@ -80,14 +80,14 @@ TEST(CircleSpec, SetAreaUpdatesRadiusAndFerence) {
   EXPECT_NEAR(circle.getArea(), new_area, EPS);
 }
 
-TEST(CircleSpec, SetAreaRejectsNegativeValue) {
+TEST(st2, circle10) {
   Circle circle(3.0);
   const double original_area = circle.getArea();
   EXPECT_THROW(circle.setArea(-20.0), std::invalid_argument);
   EXPECT_NEAR(circle.getArea(), original_area, EPS);
 }
 
-TEST(CircleSpec, SettingRadiusToZeroClearsValues) {
+TEST(st2, circle11) {
   Circle circle(8.8);
   circle.setRadius(0.0);
   EXPECT_NEAR(circle.getRadius(), 0.0, EPS);
@@ -95,7 +95,7 @@ TEST(CircleSpec, SettingRadiusToZeroClearsValues) {
   EXPECT_NEAR(circle.getArea(), 0.0, EPS);
 }
 
-TEST(CircleSpec, SettingFerenceToZeroClearsValues) {
+TEST(st2, circle12) {
   Circle circle(8.8);
   circle.setFerence(0.0);
   EXPECT_NEAR(circle.getRadius(), 0.0, EPS);
@@ -103,7 +103,7 @@ TEST(CircleSpec, SettingFerenceToZeroClearsValues) {
   EXPECT_NEAR(circle.getArea(), 0.0, EPS);
 }
 
-TEST(CircleSpec, SettingAreaToZeroClearsValues) {
+TEST(st2, circle13) {
   Circle circle(8.8);
   circle.setArea(0.0);
   EXPECT_NEAR(circle.getRadius(), 0.0, EPS);
@@ -111,7 +111,7 @@ TEST(CircleSpec, SettingAreaToZeroClearsValues) {
   EXPECT_NEAR(circle.getArea(), 0.0, EPS);
 }
 
-TEST(CircleSpec, ChainedUpdatesRemainConsistent) {
+TEST(st2, circle14) {
   Circle circle(9.0);
   circle.setRadius(1.5);
   circle.setFerence(18.8495);
@@ -122,21 +122,21 @@ TEST(CircleSpec, ChainedUpdatesRemainConsistent) {
   EXPECT_NEAR(circle.getArea(), PI * expected_radius * expected_radius, 0.1);
 }
 
-TEST(CircleSpec, MathematicalRelationsHold) {
+TEST(st2, circle15) {
   Circle circle(6.6);
   const double radius = circle.getRadius();
   EXPECT_NEAR(circle.getFerence() / (2.0 * radius), PI, EPS);
   EXPECT_NEAR(circle.getArea() / (radius * radius), PI, EPS);
 }
 
-TEST(CircleSpec, ConstGetterAccessWorks) {
+TEST(st2, circle16) {
   const Circle circle(12.3);
   EXPECT_NEAR(circle.getRadius(), 12.3, EPS);
   EXPECT_NEAR(circle.getFerence(), 2.0 * PI * 12.3, EPS);
   EXPECT_NEAR(circle.getArea(), PI * 12.3 * 12.3, EPS);
 }
 
-TEST(CircleSpec, AreaRoundTripStaysStable) {
+TEST(st2, circle17) {
   Circle circle;
   const double test_area = 200.0;
   circle.setArea(test_area);
@@ -144,20 +144,20 @@ TEST(CircleSpec, AreaRoundTripStaysStable) {
   EXPECT_NEAR(circle.getFerence(), calculated_ference, EPS);
 }
 
-TEST(EarthRopeSpec, GapIsPositive) {
+TEST(st2, rope1) {
   EXPECT_GT(solveEarthRopeTask(), 0.0);
 }
 
-TEST(EarthRopeSpec, GapMatchesClosedForm) {
+TEST(st2, rope2) {
   const double expected_gap = 1.0 / (2.0 * PI);
   EXPECT_NEAR(solveEarthRopeTask(), expected_gap, EPS);
 }
 
-TEST(EarthRopeSpec, GapHasExpectedMagnitude) {
+TEST(st2, rope3) {
   EXPECT_NEAR(solveEarthRopeTask(), 0.159155, 1e-6);
 }
 
-TEST(PoolSpec, ConcreteCostMatchesGeometry) {
+TEST(st2, pool1) {
   const PoolCosts costs = solvePoolTask();
   Circle pool(3.0);
   Circle outer(pool.getRadius() + 1.0);
@@ -165,29 +165,29 @@ TEST(PoolSpec, ConcreteCostMatchesGeometry) {
   EXPECT_NEAR(costs.concrete_cost / 1000.0, expected_area, EPS);
 }
 
-TEST(PoolSpec, FenceCostMatchesOuterCircle) {
+TEST(st2, pool2) {
   const PoolCosts costs = solvePoolTask();
   Circle outer(4.0);
   EXPECT_NEAR(costs.fence_cost / 2000.0, outer.getFerence(), EPS);
 }
 
-TEST(PoolSpec, ConcreteCostIsPositive) {
+TEST(st2, pool3) {
   const PoolCosts costs = solvePoolTask();
   EXPECT_GT(costs.concrete_cost, 0.0);
 }
 
-TEST(PoolSpec, FenceCostIsPositive) {
+TEST(st2, pool4) {
   const PoolCosts costs = solvePoolTask();
   EXPECT_GT(costs.fence_cost, 0.0);
 }
 
-TEST(PoolSpec, CostsHaveExpectedApproximateValues) {
+TEST(st2, pool5) {
   const PoolCosts costs = solvePoolTask();
   EXPECT_NEAR(costs.concrete_cost, 21991.14857512855, 1e-3);
   EXPECT_NEAR(costs.fence_cost, 50265.48245743669, 1e-3);
 }
 
-TEST(PoolSpec, TotalCostMatchesSum) {
+TEST(st2, pool6) {
   const PoolCosts costs = solvePoolTask();
   EXPECT_NEAR(costs.concrete_cost + costs.fence_cost,
               72256.63103256524, 1e-3);
