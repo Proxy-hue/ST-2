@@ -1,12 +1,12 @@
 // Copyright 2022 UNN-CS Team
 
-#include "circle.h"
-#include "tasks.h"
-
 #include <cmath>
 #include <stdexcept>
 
 #include <gtest/gtest.h>
+
+#include "circle.h"
+#include "tasks.h"
 
 const double EPS = 1e-5;
 const double PI = 3.14159265358979323846;
