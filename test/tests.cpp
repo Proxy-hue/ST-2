@@ -1,7 +1,6 @@
 // Copyright 2022 UNN-CS Team
 
-#include <cmath>
-
+#include <math.h>
 #include <stdexcept>
 
 #include <gtest/gtest.h>
