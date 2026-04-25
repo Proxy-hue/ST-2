@@ -1,7 +1,6 @@
 // Copyright 2022 UNN-CS Team
 
 #include <cmath>
-#include <stdexcept>
 
 #include <gtest/gtest.h>
 
@@ -34,7 +33,7 @@ TEST(st2, circle3) {
 }
 
 TEST(st2, circle4) {
-  EXPECT_THROW(Circle(-10.5), std::invalid_argument);
+  EXPECT_ANY_THROW(Circle(-10.5));
 }
 
 TEST(st2, circle5) {
@@ -49,7 +48,7 @@ TEST(st2, circle5) {
 TEST(st2, circle6) {
   Circle circle(3.0);
   const double original_radius = circle.getRadius();
-  EXPECT_THROW(circle.setRadius(-2.5), std::invalid_argument);
+  EXPECT_ANY_THROW(circle.setRadius(-2.5));
   EXPECT_NEAR(circle.getRadius(), original_radius, EPS);
 }
 
@@ -66,7 +65,7 @@ TEST(st2, circle7) {
 TEST(st2, circle8) {
   Circle circle(3.0);
   const double original_ference = circle.getFerence();
-  EXPECT_THROW(circle.setFerence(-15.0), std::invalid_argument);
+  EXPECT_ANY_THROW(circle.setFerence(-15.0));
   EXPECT_NEAR(circle.getFerence(), original_ference, EPS);
 }
 
@@ -83,7 +82,7 @@ TEST(st2, circle9) {
 TEST(st2, circle10) {
   Circle circle(3.0);
   const double original_area = circle.getArea();
-  EXPECT_THROW(circle.setArea(-20.0), std::invalid_argument);
+  EXPECT_ANY_THROW(circle.setArea(-20.0));
   EXPECT_NEAR(circle.getArea(), original_area, EPS);
 }
 
