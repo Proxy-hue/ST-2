@@ -2,6 +2,8 @@
 
 #include <cmath>
 
+#include <stdexcept>
+
 #include <gtest/gtest.h>
 
 #include "circle.h"
