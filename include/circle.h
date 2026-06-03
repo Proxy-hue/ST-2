@@ -19,10 +19,11 @@ class Circle {
   double ference_;
   double area_;
 
-  static constexpr double PI = 3.14159265358979323846;
-  void updateByRadius();
-  void updateByFerence();
-  void updateByArea();
+  static constexpr double kPi = 3.14159265358979323846;
+
+  void rebuildFromRadius(double radius);
+  void rebuildFromFerence(double ference);
+  void rebuildFromArea(double area);
 };
 
 

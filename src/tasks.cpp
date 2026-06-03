@@ -5,28 +5,37 @@
 
 namespace {
 
-constexpr double kEarthRadiusMeters = 6378.1 * 1000.0;
+constexpr double kMetersInKilometer = 1000.0;
+constexpr double kEarthRadiusKilometers = 6378.1;
+constexpr double kInsertedRopeMeters = 1.0;
 constexpr double kPoolRadius = 3.0;
 constexpr double kPathWidth = 1.0;
 constexpr double kConcretePricePerSquareMeter = 1000.0;
 constexpr double kFencePricePerMeter = 2000.0;
 
+double earthRadiusInMeters() {
+  return kEarthRadiusKilometers * kMetersInKilometer;
+}
+
 }  // namespace
 
 double solveEarthRopeTask() {
-  Circle earth(kEarthRadiusMeters);
-  const double original_ference = earth.getFerence();
-  earth.setFerence(original_ference + 1.0);
-  return earth.getRadius() - kEarthRadiusMeters;
+  const double base_radius = earthRadiusInMeters();
+  Circle rope(base_radius);
+
+  const double tight_length = rope.getFerence();
+  rope.setFerence(tight_length + kInsertedRopeMeters);
+
+  return rope.getRadius() - base_radius;
 }
 
 PoolCosts solvePoolTask() {
   Circle pool(kPoolRadius);
-  Circle outer(pool.getRadius() + kPathWidth);
+  Circle pool_with_path(kPoolRadius + kPathWidth);
 
-  const double path_area = outer.getArea() - pool.getArea();
-  const double concrete_cost = path_area * kConcretePricePerSquareMeter;
-  const double fence_cost = outer.getFerence() * kFencePricePerMeter;
+  const double walkway_area = pool_with_path.getArea() - pool.getArea();
+  const double concrete_cost = walkway_area * kConcretePricePerSquareMeter;
+  const double fence_cost = pool_with_path.getFerence() * kFencePricePerMeter;
 
   return {concrete_cost, fence_cost};
 }

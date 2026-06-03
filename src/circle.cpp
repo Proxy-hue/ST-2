@@ -4,48 +4,49 @@
 #include <cmath>
 #include <stdexcept>
 
-void Circle::updateByRadius() {
-  ference_ = 2.0 * PI * radius_;
-  area_ = PI * radius_ * radius_;
+namespace {
+
+void ensureNonNegative(double value, const char* value_name) {
+  if (value < 0.0) {
+    throw std::invalid_argument(value_name);
+  }
 }
 
-void Circle::updateByFerence() {
-  radius_ = ference_ / (2.0 * PI);
-  area_ = PI * radius_ * radius_;
+}  // namespace
+
+void Circle::rebuildFromRadius(double radius) {
+  ensureNonNegative(radius, "Circle radius must be non-negative");
+
+  radius_ = radius;
+  ference_ = 2.0 * kPi * radius_;
+  area_ = kPi * radius_ * radius_;
 }
 
-void Circle::updateByArea() {
-  radius_ = std::sqrt(area_ / PI);
-  ference_ = 2.0 * PI * radius_;
+void Circle::rebuildFromFerence(double ference) {
+  ensureNonNegative(ference, "Circle circumference must be non-negative");
+
+  ference_ = ference;
+  radius_ = ference_ / (2.0 * kPi);
+  area_ = ference_ * ference_ / (4.0 * kPi);
+}
+
+void Circle::rebuildFromArea(double area) {
+  ensureNonNegative(area, "Circle area must be non-negative");
+
+  area_ = area;
+  radius_ = std::sqrt(area_ / kPi);
+  ference_ = 2.0 * kPi * radius_;
 }
 
 Circle::Circle(double radius) : radius_(0.0), ference_(0.0), area_(0.0) {
-  setRadius(radius);
+  rebuildFromRadius(radius);
 }
 
-void Circle::setRadius(double radius) {
-  if (radius < 0.0) {
-    throw std::invalid_argument("Radius cannot be negative");
-  }
-  radius_ = radius;
-  updateByRadius();
-}
+void Circle::setRadius(double radius) { rebuildFromRadius(radius); }
 
-void Circle::setFerence(double ference) {
-  if (ference < 0.0) {
-    throw std::invalid_argument("Ference cannot be negative");
-  }
-  ference_ = ference;
-  updateByFerence();
-}
+void Circle::setFerence(double ference) { rebuildFromFerence(ference); }
 
-void Circle::setArea(double area) {
-  if (area < 0.0) {
-    throw std::invalid_argument("Area cannot be negative");
-  }
-  area_ = area;
-  updateByArea();
-}
+void Circle::setArea(double area) { rebuildFromArea(area); }
 
 double Circle::getRadius() const {
   return radius_;
